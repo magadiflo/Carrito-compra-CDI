@@ -1,4 +1,4 @@
-package org.aguzman.apiservlet.webapp.headers.listeners;
+package org.aguzman.apiservlet.webapp.headers.filters.listeners;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebListener;
@@ -40,9 +40,9 @@ public class AplicacionListener implements ServletContextListener,
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         servletContext.log("inicializando la sesion http");
-        Carro carro = new Carro();
-        HttpSession session = se.getSession();
-        session.setAttribute("carro", carro);
+//        Carro carro = new Carro();
+//        HttpSession session = se.getSession();
+//        session.setAttribute("carro", carro);
     }
 
     @Override

@@ -1,0 +1,1 @@
+<beans/> <!-- Es necesario esta etiqueta en este directorio y archivo para activar la Inyección de dependencia -->
