@@ -19,12 +19,14 @@ public class ProductoServlet extends HttpServlet {
     @Inject
     private ProductoService service;
 
+    @Inject
+    private LoginService auth;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Producto> productos = this.service.listar();
 
-        LoginService auth = new LoginServiceSessionImpl();
-        Optional<String> usernameOptional = auth.getUsername(req);
+        Optional<String> usernameOptional = this.auth.getUsername(req);
 
         req.setAttribute("productos", productos);
         req.setAttribute("username", usernameOptional);

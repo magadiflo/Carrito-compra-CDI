@@ -17,10 +17,12 @@ public class LoginServlet extends HttpServlet {
     @Inject
     private UsuarioService service;
 
+    @Inject
+    private LoginService auth;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginService auth = new LoginServiceSessionImpl();
-        Optional<String> usernameOptional = auth.getUsername(req);
+        Optional<String> usernameOptional = this.auth.getUsername(req);
 
         if (usernameOptional.isPresent()) {
             resp.setContentType("text/html;charset=UTF-8");
