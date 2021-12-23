@@ -1,5 +1,6 @@
 package org.aguzman.apiservlet.webapp.headers.controllers;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,21 +10,20 @@ import org.aguzman.apiservlet.webapp.headers.models.Usuario;
 import org.aguzman.apiservlet.webapp.headers.services.LoginService;
 import org.aguzman.apiservlet.webapp.headers.services.LoginServiceSessionImpl;
 import org.aguzman.apiservlet.webapp.headers.services.UsuarioService;
-import org.aguzman.apiservlet.webapp.headers.services.UsuarioServiceImpl;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/usuarios")
 public class UsuarioServlet extends HttpServlet {
 
+    @Inject
+    private UsuarioService service;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        UsuarioService service = new UsuarioServiceImpl(conn);
-        List<Usuario> usuarios = service.listar();
+        List<Usuario> usuarios = this.service.listar();
 
         LoginService auth = new LoginServiceSessionImpl();
         Optional<String> usernameOptional = auth.getUsername(req);

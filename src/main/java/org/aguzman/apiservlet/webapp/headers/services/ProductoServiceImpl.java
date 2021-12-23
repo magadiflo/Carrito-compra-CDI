@@ -1,5 +1,6 @@
 package org.aguzman.apiservlet.webapp.headers.services;
 
+import jakarta.enterprise.inject.Alternative;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
 
@@ -7,6 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Con la anotación @Alternative le decimos que esta clase que implementa la interfaz ProductoService no será
+ * usada en la inyección de dependencia, sino la clase que no tenga esa anotación. Ahora, si quisieramos usar
+ * esta clase para como inyección de dependencia, deberíamos agregarle otra anotación @Named("mi_nombre") y
+ * usar ese nombre para poder hacer la inyección de dependencia
+ */
+@Alternative
 public class ProductoServiceImpl implements ProductoService{
     @Override
     public List<Producto> listar() {

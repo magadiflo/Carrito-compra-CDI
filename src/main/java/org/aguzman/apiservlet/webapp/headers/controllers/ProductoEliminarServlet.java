@@ -1,5 +1,6 @@
 package org.aguzman.apiservlet.webapp.headers.controllers;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,19 +8,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
 import org.aguzman.apiservlet.webapp.headers.services.ProductoService;
-import org.aguzman.apiservlet.webapp.headers.services.ProductoServiceJdbcImpl;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet({"/productos/eliminar"})
 public class ProductoEliminarServlet extends HttpServlet {
 
+    @Inject
+    private ProductoService service;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        ProductoService service = new ProductoServiceJdbcImpl(conn);
         long id;
         try {
             id = Long.parseLong(req.getParameter("id"));
@@ -28,9 +28,9 @@ public class ProductoEliminarServlet extends HttpServlet {
         }
 
         if (id > 0) {
-            Optional<Producto> optional = service.porId(id);
+            Optional<Producto> optional = this.service.porId(id);
             if (optional.isPresent()) {
-                service.eliminar(id);
+                this.service.eliminar(id);
                 //Redirigimos
                 resp.sendRedirect(req.getContextPath() + "/productos");
             } else {

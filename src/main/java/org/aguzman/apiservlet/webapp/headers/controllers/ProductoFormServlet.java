@@ -1,5 +1,6 @@
 package org.aguzman.apiservlet.webapp.headers.controllers;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,10 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
 import org.aguzman.apiservlet.webapp.headers.services.ProductoService;
-import org.aguzman.apiservlet.webapp.headers.services.ProductoServiceJdbcImpl;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,10 +21,11 @@ import java.util.Optional;
 @WebServlet({"/productos/form"})
 public class ProductoFormServlet extends HttpServlet {
 
+    @Inject
+    private ProductoService service;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        ProductoService service = new ProductoServiceJdbcImpl(conn);
         long id;
         try{
             id = Long.parseLong(req.getParameter("id"));
@@ -35,12 +35,12 @@ public class ProductoFormServlet extends HttpServlet {
         Producto producto = new Producto();
         producto.setCategoria(new Categoria());
         if(id > 0){
-            Optional<Producto> optional = service.porId(id);
+            Optional<Producto> optional = this.service.porId(id);
             if(optional.isPresent()){
                 producto = optional.get();
             }
         }
-        req.setAttribute("categorias", service.listarCategoria());
+        req.setAttribute("categorias", this.service.listarCategoria());
         req.setAttribute("producto", producto);
         req.setAttribute("title", req.getAttribute("title") + " | Formulario de productos");
         getServletContext().getRequestDispatcher("/form.jsp").forward(req, resp);
@@ -48,8 +48,6 @@ public class ProductoFormServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection conn = (Connection) req.getAttribute("conn");
-        ProductoService service = new ProductoServiceJdbcImpl(conn);
         String nombre = req.getParameter("nombre");
         Integer precio;
 
@@ -114,7 +112,7 @@ public class ProductoFormServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/productos");
         } else {
             req.setAttribute("errores", errores);
-            req.setAttribute("categorias", service.listarCategoria());
+            req.setAttribute("categorias", this.service.listarCategoria());
             req.setAttribute("producto", producto);
             req.setAttribute("title", req.getAttribute("title") + " | Formulario de productos");
             getServletContext().getRequestDispatcher("/form.jsp").forward(req, resp);
