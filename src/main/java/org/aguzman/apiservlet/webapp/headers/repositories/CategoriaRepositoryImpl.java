@@ -1,15 +1,15 @@
 package org.aguzman.apiservlet.webapp.headers.repositories;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.aguzman.apiservlet.webapp.headers.configs.MysqlConn;
+import org.aguzman.apiservlet.webapp.headers.configs.Repositorio;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
+@Repositorio
 public class CategoriaRepositoryImpl implements Repository<Categoria>{
 
     private Connection conn;
