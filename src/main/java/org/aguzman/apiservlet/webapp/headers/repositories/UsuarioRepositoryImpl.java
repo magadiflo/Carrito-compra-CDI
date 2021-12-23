@@ -24,7 +24,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
             while(rs.next()){
                 Usuario usuario = this.getUsuario(rs);
                 usuarios.add(usuario);
-            }♦
+            }
         }
         return usuarios;
     }
