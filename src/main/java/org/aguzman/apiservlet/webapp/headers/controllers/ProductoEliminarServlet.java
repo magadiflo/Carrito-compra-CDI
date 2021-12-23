@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.aguzman.apiservlet.webapp.headers.configs.ProductoServicePrincipal;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
 import org.aguzman.apiservlet.webapp.headers.services.ProductoService;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ProductoEliminarServlet extends HttpServlet {
 
     @Inject
+    @ProductoServicePrincipal
     private ProductoService service;
 
     @Override

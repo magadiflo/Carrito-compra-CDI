@@ -2,7 +2,7 @@ package org.aguzman.apiservlet.webapp.headers.repositories;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.aguzman.apiservlet.webapp.headers.configs.MysqlConn;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 
 import java.sql.*;
@@ -15,7 +15,7 @@ public class CategoriaRepositoryImpl implements Repository<Categoria>{
     private Connection conn;
 
     @Inject
-    public CategoriaRepositoryImpl(@Named("conn") Connection conn) {
+    public CategoriaRepositoryImpl(@MysqlConn Connection conn) {
         this.conn = conn;
     }
 

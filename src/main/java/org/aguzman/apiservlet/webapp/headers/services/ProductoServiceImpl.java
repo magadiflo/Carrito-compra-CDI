@@ -14,7 +14,7 @@ import java.util.Optional;
  * esta clase para como inyección de dependencia, deberíamos agregarle otra anotación @Named("mi_nombre") y
  * usar ese nombre para poder hacer la inyección de dependencia
  */
-@Alternative
+//@Alternative
 public class ProductoServiceImpl implements ProductoService{
     @Override
     public List<Producto> listar() {
