@@ -1,6 +1,5 @@
 package org.aguzman.apiservlet.webapp.headers.services;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.aguzman.apiservlet.webapp.headers.configs.Service;
 import org.aguzman.apiservlet.webapp.headers.models.Usuario;

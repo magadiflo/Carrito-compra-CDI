@@ -1,6 +1,5 @@
 package org.aguzman.apiservlet.webapp.headers.services;
 
-import jakarta.enterprise.inject.Alternative;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
 

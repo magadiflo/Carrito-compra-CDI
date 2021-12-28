@@ -1,6 +1,5 @@
 package org.aguzman.apiservlet.webapp.headers.services;
 
-import jakarta.enterprise.inject.Alternative;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
