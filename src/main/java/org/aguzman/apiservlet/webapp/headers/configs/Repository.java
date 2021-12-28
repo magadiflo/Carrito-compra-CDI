@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @Stereotype
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Repositorio {
+public @interface Repository {
 }

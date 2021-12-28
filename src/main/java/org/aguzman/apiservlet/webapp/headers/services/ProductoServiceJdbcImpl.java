@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import org.aguzman.apiservlet.webapp.headers.configs.ProductoServicePrincipal;
 import org.aguzman.apiservlet.webapp.headers.models.Categoria;
 import org.aguzman.apiservlet.webapp.headers.models.Producto;
-import org.aguzman.apiservlet.webapp.headers.repositories.Repository;
+import org.aguzman.apiservlet.webapp.headers.repositories.CrudRepository;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.Optional;
 public class ProductoServiceJdbcImpl implements ProductoService {
 
     @Inject
-    private Repository<Producto> repositoryJdbc;
+    private CrudRepository<Producto> repositoryJdbc;
 
     @Inject
-    private Repository<Categoria> repositoryCategoriaJdbc;
+    private CrudRepository<Categoria> repositoryCategoriaJdbc;
 
     @Override
     public List<Producto> listar() {
