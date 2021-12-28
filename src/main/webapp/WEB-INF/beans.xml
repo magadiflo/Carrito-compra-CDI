@@ -4,5 +4,6 @@
        version="3.0" bean-discovery-mode="annotated">
     <interceptors>
         <class>org.aguzman.apiservlet.webapp.headers.interceptors.LoggingInterceptor</class>
+        <class>org.aguzman.apiservlet.webapp.headers.interceptors.TransactionalInterceptor</class>
     </interceptors>
 </beans>
